@@ -17,11 +17,22 @@ module.exports = function (config, argv) {
   const pages = get(SAAS_CONFIG, 'page', {});
   const debug = get(SAAS_CONFIG, 'debug', false);
   const microAppName = get(SAAS_CONFIG, 'microAppName', 'boh-layout');
+  const weAppHostUrl = get(SAAS_CONFIG, 'weAppHostUrl', []);
 
   let layout = get(SAAS_CONFIG, 'layout', false);
   if (layout === true) {
     layout = 'boh-layout/dev/1.0.0';
   }
+
+  const weAppHostJS = [];
+  const weAppHostCSS = [];
+  weAppHostUrl.forEach((url) => {
+    if (url.indexOf('.js') > -1) {
+      weAppHostJS.push(url);
+    } else if (url.indexOf('.css') > -1) {
+      weAppHostCSS.push(url);
+    }
+  });
 
   htmlWebpackPlugins.push(new HtmlWebpackPlugin({
     inject: appType === 'weAppHost',
@@ -39,6 +50,9 @@ module.exports = function (config, argv) {
     microAppName,
     layout,
     env: process.env.NODE_ENV === 'development' ? 'local' : PUBLISH_ENV,
+
+    weAppHostJS,
+    weAppHostCSS,
   }));
 
   config.plugins = config.plugins.concat(htmlWebpackPlugins);
