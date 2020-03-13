@@ -12,14 +12,10 @@ module.exports = function () {
       path: BUILD_PATH,
       publicPath: ASSETS_URL,
       filename: '[name].js',
-      libraryTarget: 'system',
       chunkFilename: '[name].chunk.js'
     },
     module: {
-      rules: [
-        // If building code using the System global in Webpack, the following config is needed to avoid rewriting
-        { parser: { system: false } }
-      ]
+      rules: [],
     },
     plugins: []
   };

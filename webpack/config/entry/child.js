@@ -4,9 +4,12 @@ const path = require('path');
 const fs = require('fs');
 const get = require('lodash/get');
 const nunjucks = require('nunjucks');
-const { ROOT_PATH, SAAS_CONFIG, SRC_PATH, PUBLISH_ENV } = require('../util/const');
+const { ROOT_PATH, SAAS_CONFIG, SRC_PATH, PUBLISH_ENV } = require('../../util/const');
+
 const microAppName = get(SAAS_CONFIG, 'microAppName', '');
-const plugins = require('../util/resolvePlugins')();
+const basename = get(SAAS_CONFIG, 'basename', '');
+
+const plugins = require('../../util/resolvePlugins')();
 const { resolveEntry } = plugins;
 
 nunjucks.configure('*', {
@@ -27,7 +30,7 @@ module.exports = function (config, argv) {
   let entries = config.entry || {};
   let pages = get(SAAS_CONFIG, 'page', {});
   pages = filterPage(pages);
-  
+
   // entry 去重
   const entrys = Array.from(new Set(pages.map(item => item.module)));
   entrys.forEach(chunkName => {
@@ -48,13 +51,23 @@ module.exports = function (config, argv) {
 
   const pagesNew = [];
   let num = 1;
+  const version = PUBLISH_ENV === 'daily' ? (+ new Date()) : '';
   pages.forEach(item => {
     item.moduleReal = item.module;
     if (pagesNew.findIndex(itemInner => itemInner.module === item.module) > -1) {
-      pagesNew.push({
+      const page = {
         ...item,
         module: `${item.module}-${num}`,
-      });
+      };
+      page.moduleName = page.module;
+
+      if (version) {
+        page.url = [PUBLIC_PATH + item.moduleReal + '.js?t=' + version];
+      } else {
+        page.url = [PUBLIC_PATH + item.moduleReal + '.js'];
+      }
+
+      pagesNew.push(page);
       num++;
     } else {
       pagesNew.push(item);
@@ -65,7 +78,8 @@ module.exports = function (config, argv) {
     path.join(ROOT_PATH, '.micro_app_config.js'),
     nunjucks.renderString(fs.readFileSync(path.join(__dirname, '../dynamic/micro_app_config.nunjucks')).toString(), {
       appName: microAppName,
-      pages: JSON.stringify(pagesNew),
+      basename,
+      modules: JSON.stringify(pagesNew),
       version: PUBLISH_ENV === 'daily' ? (+ new Date()) : '',
     }),
   );

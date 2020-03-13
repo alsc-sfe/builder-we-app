@@ -5,6 +5,7 @@ process.env.NODE_ENV = 'development';
 const applyEntryConfig = require('./config/entry');
 const applyResolveConfig = require('./config/resolve');
 const applyHtmlConfig = require('./config/html');
+const applySystemModuleConfig = require('./config/system-module');
 const applyImageConfig = require('./config/image');
 const applyStyleConfig = require('./config/style');
 const applyExternalConfig = require('./config/externals');
@@ -24,6 +25,8 @@ let baseConfig = getWebpackBase();
 applyEntryConfig(baseConfig);
 // webpack.resolve
 applyResolveConfig(baseConfig);
+// system module
+applySystemModuleConfig(baseConfig);
 // ts/tsx
 applyTsConfig(baseConfig);
 // js/jsx

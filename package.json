@@ -1,13 +1,13 @@
 {
-  "name": "@saasfe/builder-saas-spa",
-  "version": "1.4.37",
+  "name": "@saasfe/builder-we-app",
+  "version": "1.0.0",
   "description": "The KOS Builder Module for Saas MicroApp",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/alsc-sfe/builder-we-app.git"
   },
-  "author": "yongbao.fyb",
+  "author": "zetay",
   "license": "ISC",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
