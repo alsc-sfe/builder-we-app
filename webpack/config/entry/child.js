@@ -27,24 +27,23 @@ const filterPage = (pages) => {
 };
 
 module.exports = function (config, argv) {
-  let entries = config.entry || {};
+  const entries = config.entry || {};
   let pages = get(SAAS_CONFIG, 'page', {});
   pages = filterPage(pages);
 
   // entry 去重
   const entrys = Array.from(new Set(pages.map(item => item.module)));
   entrys.forEach(chunkName => {
-    let entryValue = [];
-    let hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
+    const entryValue = [];
+    const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
 
     //每个页面的index.jsx入口文件
-    let jsEntryFile = path.join(SRC_PATH, chunkName, 'index');
-    let commonEntryFile = path.join(SRC_PATH, 'common/index');
+    const jsEntryFile = path.join(SRC_PATH, chunkName, 'index');
     // development下使用热更新
     if (process.env.NODE_ENV === 'development') {
-      entryValue.push(hotMiddlewareScript, commonEntryFile, jsEntryFile);
+      entryValue.push(hotMiddlewareScript, jsEntryFile);
     } else {
-      entryValue.push(commonEntryFile, jsEntryFile);
+      entryValue.push(jsEntryFile);
     }
     entries[chunkName] = resolveEntry.concat(entryValue);
   })

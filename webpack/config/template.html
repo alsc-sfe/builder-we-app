@@ -1,7 +1,7 @@
 <%
-  const { 
-    appType, isWeAppHost, title,
-    assets_url, heads, bodies, pages, debug, microAppName, layout 
+  const {
+    appType, isWeAppHost, title, env,
+    assets_url, heads, bodies, pages, debug, microAppName, layout
   } = htmlWebpackPlugin.options
 %>
 <!DOCTYPE html>
@@ -16,6 +16,14 @@
     <link rel="shortcut icon" href="https://gw.alipayobjects.com/zos/basement_prod/b2725a7a-bd7d-488a-8876-510140aa5791.ico" type="image/x-icon" />
     <% for(let i = 0; i < heads.length; i++) { %>
     <%= heads[i] %>
+    <% } %>
+    <script src="https://gw.alipayobjects.com/as/g/component/babel-polyfill/6.20.0/polyfill.min.js" crossorigin="anonymous"></script>
+    <% if(env === 'prod') { %>
+    <script src="https://gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.production.min.js" crossorigin="anonymous"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+    <% } else { %>
+    <script src="https://gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.development.js" crossorigin="anonymous"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.development.js" crossorigin="anonymous"></script>
     <% } %>
   </head>
   <body>

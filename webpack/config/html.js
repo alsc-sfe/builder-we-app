@@ -38,7 +38,7 @@ module.exports = function (config, argv) {
     assets_url: ASSETS_URL,
     microAppName,
     layout,
-    env: process.env.NODE_ENV ? 'local' : PUBLISH_ENV,
+    env: process.env.NODE_ENV === 'development' ? 'local' : PUBLISH_ENV,
   }));
 
   config.plugins = config.plugins.concat(htmlWebpackPlugins);
