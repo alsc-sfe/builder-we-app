@@ -1,0 +1,24 @@
+const microAppName = '{{ appName }}';
+let pages = {{ pages }};
+const version = '{{ version }}';
+
+const modules = [];
+pages.forEach(item => {
+  modules.push({
+    ...item,
+    moduleName: item.module,
+    getComponent: () => {
+      if (version) {
+        return System.import(PUBLIC_PATH + item.moduleReal + '.js?t=' + version);
+      } else {
+        return System.import(PUBLIC_PATH + item.moduleReal + '.js');
+      }
+    },
+  });
+});
+
+export default {
+  microAppName,
+  modules,
+  version,
+};

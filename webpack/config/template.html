@@ -1,0 +1,171 @@
+<%
+  const { assets_url, heads, bodies, pages, debug, microAppName, commonAppName, layout } = htmlWebpackPlugin.options
+  const version = '?v=' + (+ new Date())
+  const antdVersion = "3.25.2"
+  const waLoaderVersion = "1.1.13"
+%>
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="format-detection" content="email=no" />
+  <link rel="shortcut icon" href="https://gw.alipayobjects.com/zos/basement_prod/b2725a7a-bd7d-488a-8876-510140aa5791.ico" type="image/x-icon" />
+  <% for(let i = 0; i < heads.length; i++) { %>
+    <%= heads[i] %>
+  <% } %>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_825912_8drbhr0dp7i.css">
+  <link rel="stylesheet" href="https://gw.alipayobjects.com/os/lib/antd/<%= antdVersion %>/dist/antd.css">
+  <link rel="stylesheet" href="//gw.alipayobjects.com/os/mentor/choice-we-app-loader/<%= waLoaderVersion %>/system/index.css">
+
+  <link rel="preload" href="https://gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.development.js" as="script" crossorigin="anonymous">
+  <link rel="preload" href="https://gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.development.js" as="script" crossorigin="anonymous">
+
+  <link rel="preload" href="https://gw.alipayobjects.com/os/lib/systemjs/6.1.4/dist/system.min.js" as="script" crossorigin="anonymous">
+  <link rel="preload" href="https://gw.alipayobjects.com/os/lib/systemjs/6.1.4/dist/extras/named-register.min.js" as="script" crossorigin="anonymous">
+
+  <link rel="preload" href="https://gw.alipayobjects.com/os/lib/single-spa/4.3.5/lib/system/single-spa.min.js" as="script" crossorigin="anonymous">
+  
+  <link rel="preload" href="https://gw.alipayobjects.com/os/lib/antd/<%= antdVersion %>/dist/antd-with-locales.js" as="script" crossorigin="anonymous">
+  <link rel="preload" href="https://gw.alipayobjects.com/os/lib/ant-design/icons/2.1.1/lib/umd.js" as="script" crossorigin="anonymous">
+  
+  <link rel="preload" href="https://gw.alipayobjects.com/os/mentor/saas-fetch/2.0.6/umd/saas-fetch.js" as="script" crossorigin="anonymous">
+  
+  <link rel="preload" href="https://gw.alipayobjects.com/os/mentor/choice-we-app-loader/<%= waLoaderVersion %>/system/choice-we-app-loader.js" as="script" crossorigin="anonymous">
+
+  <script src="https://gw.alipayobjects.com/as/g/component/babel-polyfill/6.20.0/polyfill.min.js"></script>
+
+  <script src="https://gw.alipayobjects.com/os/lib/systemjs/6.1.4/dist/system.min.js" crossorigin="anonymous"></script>
+    
+  <script src="https://gw.alipayobjects.com/os/lib/moment/2.24.0/min/moment.min.js" crossorigin="anonymous"></script>
+  <script src="https://gw.alipayobjects.com/os/lib/moment/2.24.0/locale/zh-cn.js" crossorigin="anonymous"></script>
+
+  <!-- 声明依赖模块路径 -->
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        "MicroAppLoader": "https://gw.alipayobjects.com/os/mentor/choice-we-app-loader/<%= waLoaderVersion %>/system/choice-we-app-loader.js",
+        "React": "https://gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.development.js",
+        "ReactDOM": "https://gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.development.js",
+        "antd": "https://gw.alipayobjects.com/os/lib/antd/<%= antdVersion %>/dist/antd-with-locales.js",
+        "singleSpa": "https://gw.alipayobjects.com/os/lib/single-spa/4.3.5/lib/system/single-spa.min.js",
+        "AntDesignIcons": "https://gw.alipayobjects.com/os/lib/ant-design/icons/2.1.1/lib/umd.js",
+        "saas-fetch": "https://gw.alipayobjects.com/os/mentor/saas-fetch/2.0.9/umd/saas-fetch.js",
+        "saas-fetch-choice": "https://gw.alipayobjects.com/os/mentor/saas-fetch-choice/1.0.2/umd/saas-fetch-choice-min.js"
+      }
+    }
+  </script>
+  <style>
+    html,body {
+      height: 100%;
+      background: #fff;
+    }
+    .microfe-layout {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .microfe-menu {
+      height: 100%;
+    }
+    .microfe-body {
+      flex: 1;
+      height: 100%;
+      overflow: auto;
+      display: flex;
+    }
+    .microfe-wrapper {
+      flex: 1;
+      overflow: auto;
+    }
+    .microfe-root-body {
+      position: relative;
+      height: 100%;
+      min-width: 1060px;
+    }
+    body.body-min .microfe-root-body {
+      min-width: 1180px;
+    }
+    .microfe-root-content {
+      height: 100%;
+    }
+    .microfe-module,
+    .microfe-module>div {
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- <%= JSON.stringify(htmlWebpackPlugin, null, 2) %> -->
+  <div id="microfe-layout" class="microfe-layout">
+    <div class="microfe-navbar" id="boh-layout__navbar"></div>
+    <div class="microfe-body">
+      <div class="microfe-menu" id="boh-layout__menu"></div>
+      <div class="microfe-wrapper">
+        <div class="microfe-root-body">
+          <div class="microfe-root-content" id="__microfe-root-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% for(let i = 0; i < bodies.length; i++) { %>
+    <%= bodies[i] %>
+  <% } %>
+  <script>
+      (function() {
+        var pReact = System.import('React');
+        var pReactDOM = pReact.then(function() {
+          return System.import('ReactDOM');
+        });
+        var pSaaSFetch = pReactDOM.then(function() {
+          return System.import('saas-fetch').then(function(res) {
+            return res.default;
+          });
+        });
+        var pSaaSFetchChoice = pSaaSFetch.then(function(SaasFetch) {
+          return System.import('saas-fetch-choice').then(function(res) {
+            return res.default;
+          }).then(function(SaasFetchChoice) {
+            SaasFetch.registerFetcher('choice', SaasFetchChoice);
+            SaasFetch.setupConfig({
+              typeName: 'choice',
+            });
+          });
+        });
+        var pLoader = pSaaSFetchChoice.then(function() {
+          return System.import('MicroAppLoader');
+        });
+        pLoader.then(function(MicroAppLoader) {
+          MicroAppLoader.start({
+            router: {
+              routerType: MicroAppLoader.RouterType.browser,
+              basename: '/boh',
+            },
+            getMicroAppConfigPath: (appConfigPath) => {
+              if (!appConfigPath) {
+                throw new Error('Please specify appConfigPath.');
+              }
+              if (appConfigPath.lastIndexOf('app-config.js') > -1) {
+                return appConfigPath;
+              }
+              return '//bohstatic.dev.choicesaas.cn/' + appConfigPath + '/app-config.js';
+            },
+            microApps: [
+              <% if (layout) { %>
+              {
+                microAppConfigPath: '<%= layout %>',
+              },
+              <% } %>
+              {
+                microAppConfigPath: '/app-config.js',
+              },
+            ],
+          });
+        });
+      }());
+  </script>
+</body>
+</html>

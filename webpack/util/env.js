@@ -1,0 +1,44 @@
+'use strict';
+
+const path = require('path');
+const ENV = process.env;
+
+// 参见 http://def.alibaba-inc.com/doc/build/env/README
+const BUILD_USER = ENV['BUILD_USER'];
+const BUILD_DEST = ENV['BUILD_DEST'];
+const BUILD_BUILDER_DIR = ENV['BUILD_BUILDER_DIR'];
+const BUILD_WORK_DIR = ENV['BUILD_WORK_DIR'];
+const BUILD_ARGV = ENV['BUILD_ARGV'];
+const BUILD_ARGV_STR = ENV['BUILD_ARGV_STR'];
+const BUILD_DEBUG = ENV['BUILD_DEBUG'];
+const BUILD_ENV = ENV['BUILD_ENV'];
+const BUILD_ENV_TARGET = ENV['BUILD_ENV_TARGET'];
+const BUILD_DEBUG_PORT = ENV['BUILD_DEBUG_PORT'];
+const BUILD_GIT_GROUP = ENV['BUILD_GIT_GROUP'];
+const BUILD_GIT_PROJECT = ENV['BUILD_GIT_PROJECT'];
+const BUILD_GIT_COMMITID = ENV['BUILD_GIT_COMMITID'];
+const BUILD_GIT_BRANCH = ENV['BUILD_GIT_BRANCH'];
+const BUILD_GIT_VERSION = !ENV['BUILD_GIT_BRANCH'] ? undefined : ENV['BUILD_GIT_BRANCH'].split(path.sep).pop();
+
+const ENV_PARAMS = {
+  BUILD_USER,
+  BUILD_DEST,
+  BUILD_BUILDER_DIR,
+  BUILD_WORK_DIR,
+  BUILD_ARGV,
+  BUILD_ARGV_STR,
+  BUILD_DEBUG,
+  BUILD_ENV,
+  BUILD_ENV_TARGET,
+  BUILD_DEBUG_PORT,
+  BUILD_GIT_GROUP,
+  BUILD_GIT_PROJECT,
+  BUILD_GIT_COMMITID,
+  BUILD_GIT_BRANCH,
+  BUILD_GIT_VERSION,
+};
+
+// console.log('ENV:');
+// console.log(process.env);
+
+module.exports = ENV_PARAMS;
