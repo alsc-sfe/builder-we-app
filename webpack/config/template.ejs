@@ -1,7 +1,7 @@
 <%
   const {
     appType, isWeAppHost, title, env, publishEnv,
-    assetsUrl, cdnBase,
+    assetsUrl, cdnBase, hostAppName,
     heads, bodies, pages, debug, microAppName, layout,
     weAppHostCSS, weAppHostJS
   } = htmlWebpackPlugin.options
@@ -45,6 +45,7 @@
     window.env = '<%= env %>';
     window.publishEnv = '<%= publishEnv %>';
     window.cdnBase = '<%= cdnBase %>';
+    window.hostAppName = '<%= hostAppName %>';
     <% if(!isWeAppHost) { %>
     window[Symbol.for('WeAppList')] = [
       <% if (layout) { %>

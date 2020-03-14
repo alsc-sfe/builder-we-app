@@ -82,6 +82,7 @@ const PATH_PARAMS = {
   CSS_SCOPE,
   PUBLISH_ENV,
   DOMAIN_ENV: KOS_DOMAIN_ENV,
+  BUILD_APP_NAME,
 };
 
 // console.log('PROCESS_ENV');

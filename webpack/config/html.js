@@ -2,7 +2,7 @@
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const get = require('lodash/get');
-const { ASSETS_URL, SAAS_CONFIG, PUBLISH_ENV, DOMAIN_ENV } = require('../util/const');
+const { ASSETS_URL, SAAS_CONFIG, PUBLISH_ENV, DOMAIN_ENV, BUILD_APP_NAME } = require('../util/const');
 const plugins = require('../util/resolvePlugins')();
 const { isWeAppHost } = require('../util/appType');
 
@@ -54,6 +54,8 @@ module.exports = function (config, argv) {
     layout,
     env: process.env.NODE_ENV === 'development' ? 'local' : DOMAIN_ENV,
     publishEnv: process.env.NODE_ENV === 'development' ? 'local' : PUBLISH_ENV,
+
+    hostAppName: BUILD_APP_NAME,
 
     weAppHostJS,
     weAppHostCSS,
