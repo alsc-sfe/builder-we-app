@@ -46,7 +46,7 @@
     window.publishEnv = '<%= publishEnv %>';
     window.cdnBase = '<%= cdnBase %>';
     <% if(!isWeAppHost) { %>
-    window[Symbol.for('microAppsInfo')] = [
+    window[Symbol.for('WeAppList')] = [
       <% if (layout) { %>
       '<%= layout %>',
       <% } %>
