@@ -16,7 +16,6 @@ module.exports = function (config, argv) {
   const title = get(SAAS_CONFIG, 'title', '');
   const pages = get(SAAS_CONFIG, 'page', {});
   const debug = get(SAAS_CONFIG, 'debug', false);
-  const microAppName = get(SAAS_CONFIG, 'microAppName', 'boh-layout');
   const weAppHostUrl = get(SAAS_CONFIG, 'weAppHostUrl', []);
 
   let layout = get(SAAS_CONFIG, 'layout', false);
@@ -50,7 +49,6 @@ module.exports = function (config, argv) {
     assetsUrl: ASSETS_URL,
     cdnBase: CDN_BASE,
 
-    microAppName,
     layout,
     env: process.env.NODE_ENV === 'development' ? 'local' : DOMAIN_ENV,
     publishEnv: process.env.NODE_ENV === 'development' ? 'local' : PUBLISH_ENV,
