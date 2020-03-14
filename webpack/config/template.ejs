@@ -16,6 +16,8 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="format-detection" content="email=no" />
     <link rel="shortcut icon" href="https://gw.alipayobjects.com/zos/basement_prod/b2725a7a-bd7d-488a-8876-510140aa5791.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_825912_8drbhr0dp7i.css" />
+    <link rel="stylesheet" href="https://gw.alipayobjects.com/os/lib/antd/3.25.2/dist/antd.css" />
     <% for(let i = 0; i < heads.length; i++) { %>
     <%= heads[i] %>
     <% } %>
@@ -35,9 +37,24 @@
     <script src="https://gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.development.js" crossorigin="anonymous"></script>
     <script src="https://gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.development.js" crossorigin="anonymous"></script>
     <% } %>
+    <script src="https://gw.alipayobjects.com/os/lib/moment/2.24.0/min/moment.min.js" crossorigin="anonymous"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/moment/2.24.0/locale/zh-cn.js" crossorigin="anonymous"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/antd/3.25.2/dist/antd-with-locales.js" crossorigin="anonymous"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/ant-design/icons/2.1.1/lib/umd.js" crossorigin="anonymous"></script>
+    <script src="https://gw.alipayobjects.com/os/mentor/saas-fetch/2.0.9/umd/saas-fetch-min.js" crossorigin="anonymous"></script>
+    <script src="https://gw.alipayobjects.com/os/mentor/saas-fetch-choice/1.0.2/umd/saas-fetch-choice-min.js" crossorigin="anonymous"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/systemjs/6.1.4/dist/system.min.js" crossorigin="anonymous"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/systemjs/6.1.4/dist/extras/named-register.min.js" crossorigin="anonymous"></script>
+    <script src="https://g.alicdn.com/code/npm/@alife/system-react/1.0.1/library/umd/react-min.js" crossorigin="anonymous"></script>
+    <script src="https://g.alicdn.com/code/npm/@alife/system-react-dom/1.0.0/library/umd/react-dom-min.js" crossorigin="anonymous"></script>
+    <script src="https://g.alicdn.com/code/npm/@alife/system-antd/1.0.1/library/umd/antd-min.js" crossorigin="anonymous"></script>
+    <script src="https://g.alicdn.com/code/npm/@alife/system-ant-design-icons/1.0.1/library/umd/ant-design-icons-min.js" crossorigin="anonymous"></script>
+    <script src="https://g.alicdn.com/code/npm/@alife/system-saas-fetch/1.0.0/library/umd/saas-fetch-min.js" crossorigin="anonymous"></script>
   </head>
   <body>
+    <% if(publishEnv === 'local') { %>
     <!-- <%= JSON.stringify(htmlWebpackPlugin, null, 2) %> -->
+    <% } %>
     <% for(let i = 0; i < bodies.length; i++) { %>
     <%= bodies[i] %>
     <% } %>
