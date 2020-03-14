@@ -2,7 +2,7 @@
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const get = require('lodash/get');
-const { ASSETS_URL, SAAS_CONFIG, PUBLISH_ENV, DOMAIN_ENV, BUILD_APP_NAME } = require('../util/const');
+const { ASSETS_URL, SAAS_CONFIG, PUBLISH_ENV, DOMAIN_ENV, BUILD_APP_NAME, CDN_BASE } = require('../util/const');
 const plugins = require('../util/resolvePlugins')();
 const { isWeAppHost } = require('../util/appType');
 
