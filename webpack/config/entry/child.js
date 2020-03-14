@@ -69,6 +69,7 @@ module.exports = function (config, argv) {
       pagesNew.push(page);
       num++;
     } else {
+      item.moduleName = item.module;
       pagesNew.push(item);
     }
   });
