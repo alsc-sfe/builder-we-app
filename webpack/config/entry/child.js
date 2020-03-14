@@ -75,7 +75,7 @@ module.exports = function (config, argv) {
 
   fs.writeFileSync(
     path.join(ROOT_PATH, '.micro_app_config.js'),
-    nunjucks.renderString(fs.readFileSync(path.join(__dirname, '../dynamic/micro_app_config.nunjucks')).toString(), {
+    nunjucks.renderString(fs.readFileSync(path.join(__dirname, '../../dynamic/micro_app_config.nunjucks')).toString(), {
       appName: microAppName,
       basename,
       modules: JSON.stringify(pagesNew),
