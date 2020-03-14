@@ -1,7 +1,8 @@
 <%
   const {
-    appType, isWeAppHost, title, env,
-    assets_url, heads, bodies, pages, debug, microAppName, layout,
+    appType, isWeAppHost, title, env, publishEnv,
+    assetsUrl, cdnBase,
+    heads, bodies, pages, debug, microAppName, layout,
     weAppHostCSS, weAppHostJS
   } = htmlWebpackPlugin.options
 %>
@@ -18,13 +19,16 @@
     <% for(let i = 0; i < heads.length; i++) { %>
     <%= heads[i] %>
     <% } %>
+    <% if(isWeAppHost && publishEnv !== 'local') { %>
+    <link rel="stylesheet" href="<%= assetsUrl %>index.css" />
+    <% } %>
     <% if(!isWeAppHost && weAppHostCSS.length > 0) { %>
     <% for(let i = 0; i < weAppHostCSS.length; i++) { %>
     <link rel="stylesheet" href="<%= weAppHostCSS[i] %>" />
     <% } %>
     <% } %>
     <script src="https://gw.alipayobjects.com/as/g/component/babel-polyfill/6.20.0/polyfill.min.js" crossorigin="anonymous"></script>
-    <% if(env === 'prod') { %>
+    <% if(['local', 'project', 'daily'].indexOf(publishEnv) === -1) { %>
     <script src="https://gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.production.min.js" crossorigin="anonymous"></script>
     <script src="https://gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
     <% } else { %>
@@ -39,6 +43,8 @@
     <% } %>
     <script>
     window.env = '<%= env %>';
+    window.publishEnv = '<%= publishEnv %>';
+    window.cdnBase = '<%= cdnBase %>';
     <% if(!isWeAppHost) { %>
     window[Symbol.for('microAppsInfo')] = [
       <% if (layout) { %>
@@ -52,6 +58,9 @@
     <% for(let i = 0; i < weAppHostJS.length; i++) { %>
     <script src="<%= weAppHostJS[i] %>" crossorigin="anonymous"></script>
     <% } %>
+    <% } %>
+    <% if(isWeAppHost && publishEnv !== 'local') { %>
+    <script src="<%= assetsUrl %>index.js" crossorigin="anonymous"></script>
     <% } %>
   </body>
 </html>

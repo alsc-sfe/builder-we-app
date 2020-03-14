@@ -2,7 +2,7 @@
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const get = require('lodash/get');
-const { ASSETS_URL, SAAS_CONFIG, PUBLISH_ENV } = require('../util/const');
+const { ASSETS_URL, SAAS_CONFIG, PUBLISH_ENV, DOMAIN_ENV } = require('../util/const');
 const plugins = require('../util/resolvePlugins')();
 const { isWeAppHost } = require('../util/appType');
 
@@ -36,7 +36,7 @@ module.exports = function (config, argv) {
 
   htmlWebpackPlugins.push(new HtmlWebpackPlugin({
     inject: appType === 'weAppHost',
-    template: require.resolve('./template.html'),
+    template: require.resolve('./template.ejs'),
     filename: 'index.html',
 
     appType,
@@ -46,10 +46,14 @@ module.exports = function (config, argv) {
     debug,
     heads: resolveHeads,
     bodies: resolveBodies,
-    assets_url: ASSETS_URL,
+
+    assetsUrl: ASSETS_URL,
+    cdnBase: CDN_BASE,
+
     microAppName,
     layout,
-    env: process.env.NODE_ENV === 'development' ? 'local' : PUBLISH_ENV,
+    env: process.env.NODE_ENV === 'development' ? 'local' : DOMAIN_ENV,
+    publishEnv: process.env.NODE_ENV === 'development' ? 'local' : PUBLISH_ENV,
 
     weAppHostJS,
     weAppHostCSS,

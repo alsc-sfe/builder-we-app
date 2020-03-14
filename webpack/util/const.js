@@ -10,7 +10,12 @@ const SAAS_CONFIG = require(path.join(ROOT_PATH, 'app.config.ts'));
 const PKG = require(path.join(ROOT_PATH, 'package.json'));
 const PLATFORM = process.platform;
 const BUILD_ENV = process.env.NODE_ENV;
+
+// 当前所处开发阶段，project、daily、pre、prod
 const KOS_PUBLISH_ENV = process.env.KOS_PUBLISH_ENV;
+// 当前所处环境，pro、dev、tst、ttt、tst01、pre、tsm、fat
+const KOS_DOMAIN_ENV = process.env.KOS_DOMAIN_ENV;
+
 const KOS_PUBLISH_VERSION = process.env.KOS_PUBLISH_VERSION;
 const BUILD_APP_NAME = process.env.BUILD_APP_NAME;
 
@@ -48,7 +53,7 @@ let CDN_BASE = PUBLISH_ENV === 'prod' ? CDN_BASE_PROD : CDN_BASE_DAILY;
 // let ASSETS_URL = '/';
 // TODO 后期这里域名要可配置
 // http://cdn.choicesaas.cn/web/dist/appname/build_env/version/xxx.js
-let ASSETS_URL = BUILD_ENV === 'development' ? '/' : url(CDN_BASE, 'web/dist',BUILD_APP_NAME, PUBLISH_ENV, KOS_PUBLISH_VERSION, '/');
+let ASSETS_URL = BUILD_ENV === 'development' ? '/' : url(CDN_BASE, 'web/dist', BUILD_APP_NAME, PUBLISH_ENV, KOS_PUBLISH_VERSION, '/');
 
 console.log('CONST ASSETS_URL', ASSETS_URL);
 
@@ -76,6 +81,7 @@ const PATH_PARAMS = {
   SAAS_CONFIG,
   CSS_SCOPE,
   PUBLISH_ENV,
+  DOMAIN_ENV: KOS_DOMAIN_ENV,
 };
 
 // console.log('PROCESS_ENV');
