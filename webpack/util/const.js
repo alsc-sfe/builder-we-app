@@ -12,9 +12,9 @@ const PLATFORM = process.platform;
 const BUILD_ENV = process.env.NODE_ENV;
 
 // 当前所处开发阶段，project、daily、pre、prod
-const KOS_PUBLISH_ENV = process.env.KOS_PUBLISH_ENV;
+const KOS_PUBLISH_ENV = process.env.KOS_PUBLISH_ENV || (process.env.NODE_ENV === 'development' ? 'local' : undefined);
 // 当前所处环境，pro、dev、tst、ttt、tst01、pre、tsm、fat
-const KOS_DOMAIN_ENV = process.env.KOS_DOMAIN_ENV;
+const KOS_DOMAIN_ENV = process.env.KOS_DOMAIN_ENV || (process.env.NODE_ENV === 'development' ? 'local' : undefined);
 
 const KOS_PUBLISH_VERSION = process.env.KOS_PUBLISH_VERSION;
 const BUILD_APP_NAME = process.env.BUILD_APP_NAME;
