@@ -55,23 +55,26 @@
     <% if(publishEnv === 'local') { %>
     <!-- <%= JSON.stringify(htmlWebpackPlugin, null, 2) %> -->
     <% } %>
+    <script>
+      window.env = '<%= env %>';
+      window.publishEnv = '<%= publishEnv %>';
+      window.cdnBase = '<%= cdnBase %>';
+    <% if(!isWeAppHost) { %>
+      <% if(publishEnv === 'local') { %>
+      window[Symbol.for('WeAppList')] = [
+        <% if (layout) { %>
+        '<%= layout %>',
+        <% } %>
+        '/app-config.js',
+      ];
+      <% } else { %>
+      window[Symbol.for('WeAppList')] = '<%= hostAppName %>';
+      <% } %>
+    <% } %>
+    </script>
     <% for(let i = 0; i < bodies.length; i++) { %>
     <%= bodies[i] %>
     <% } %>
-    <script>
-    window.env = '<%= env %>';
-    window.publishEnv = '<%= publishEnv %>';
-    window.cdnBase = '<%= cdnBase %>';
-    window.hostAppName = '<%= hostAppName %>';
-    <% if(!isWeAppHost) { %>
-    window[Symbol.for('WeAppList')] = [
-      <% if (layout) { %>
-      '<%= layout %>',
-      <% } %>
-      '/app-config.js',
-    ];
-    <% } %>
-    </script>
     <% if(!isWeAppHost && weAppHostJS.length > 0) { %>
     <% for(let i = 0; i < weAppHostJS.length; i++) { %>
     <script src="<%= weAppHostJS[i] %>" crossorigin="anonymous"></script>
