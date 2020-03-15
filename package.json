@@ -1,6 +1,6 @@
 {
   "name": "@saasfe/builder-we-app",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "The KOS Builder Module for Saas MicroApp",
   "scripts": {},
   "repository": {
@@ -50,6 +50,7 @@
     "less": "^2.7.3",
     "less-loader": "4",
     "lodash": "4",
+    "mini-css-extract-plugin": "^0.9.0",
     "nunjucks": "^3.2.0",
     "open": "^7.0.0",
     "optimize-css-assets-webpack-plugin": "5",

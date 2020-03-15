@@ -59,6 +59,7 @@
       window.env = '<%= env %>';
       window.publishEnv = '<%= publishEnv %>';
       window.cdnBase = '<%= cdnBase %>';
+      window.hostAppName = '<%= hostAppName %>';
     <% if(!isWeAppHost) { %>
       <% if(publishEnv === 'local') { %>
       window[Symbol.for('WeAppList')] = [
@@ -81,7 +82,7 @@
     <% } %>
     <% } %>
     <% if(isWeAppHost && publishEnv !== 'local') { %>
-    <script src="<%= assetsUrl %>index.js" crossorigin="anonymous"></script>
+    <script src="<%= assetsUrl %>version-engine.js" crossorigin="anonymous"></script>
     <% } %>
   </body>
 </html>

@@ -9,16 +9,20 @@ const { resolveEntry } = plugins;
 module.exports = function (config, argv) {
   const entries = config.entry || {};
   const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
-  const entryValue = [];
-  //每个页面的index.jsx入口文件
-  const jsEntryFile = path.join(SRC_PATH, 'index');
-  // development下使用热更新
-  if (process.env.NODE_ENV === 'development') {
-    entryValue.push(hotMiddlewareScript, jsEntryFile);
-  } else {
-    entryValue.push(jsEntryFile);
-  }
-  entries.index = resolveEntry.concat(entryValue);
+
+  const fileNames = ['index', 'version-engine'];
+  fileNames.forEach((fileName) => {
+    const entryValue = [];
+    //每个页面的index.jsx入口文件
+    const filePath = path.join(SRC_PATH, fileName);
+    // development下使用热更新
+    if (process.env.NODE_ENV === 'development') {
+      entryValue.push(hotMiddlewareScript, filePath);
+    } else {
+      entryValue.push(filePath);
+    }
+    entries[fileName] = resolveEntry.concat(entryValue);
+  });
 
   config.entry = entries;
 }
