@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const get = require('lodash/get');
 const nunjucks = require('nunjucks');
-const { ROOT_PATH, SAAS_CONFIG, SRC_PATH, PUBLISH_ENV } = require('../../util/const');
+const { ROOT_PATH, SAAS_CONFIG, SRC_PATH, PUBLISH_ENV, ASSETS_URL } = require('../../util/const');
 
 const microAppName = get(SAAS_CONFIG, 'microAppName', '');
 const basename = get(SAAS_CONFIG, 'basename', '');
@@ -26,6 +26,12 @@ const filterPage = (pages) => {
   return pages;
 };
 
+const { host, port } = get(SAAS_CONFIG, 'webpack.devServer', {
+  host: 'localhost',
+  port: '8000',
+});
+const PUBLIC_PATH = PUBLISH_ENV === 'local' ? `//${host}:${port || '8000'}/` : ASSETS_URL;
+
 module.exports = function (config, argv) {
   const entries = config.entry || {};
   let pages = get(SAAS_CONFIG, 'page', {});
@@ -46,32 +52,31 @@ module.exports = function (config, argv) {
       entryValue.push(jsEntryFile);
     }
     entries[chunkName] = resolveEntry.concat(entryValue);
-  })
+  });
 
   const pagesNew = [];
   let num = 1;
   const version = PUBLISH_ENV === 'daily' ? (+ new Date()) : '';
   pages.forEach(item => {
-    item.moduleReal = item.module;
+    const page = {
+      ...item,
+      name: item.module,
+      path: item.route,
+    };
+
     if (pagesNew.findIndex(itemInner => itemInner.module === item.module) > -1) {
-      const page = {
-        ...item,
-        module: `${item.module}-${num}`,
-      };
-      page.moduleName = page.module;
+      page.name = `${item.module}-${num}`;
 
-      if (version) {
-        page.url = [PUBLIC_PATH + item.moduleReal + '.js?t=' + version];
-      } else {
-        page.url = [PUBLIC_PATH + item.moduleReal + '.js'];
-      }
-
-      pagesNew.push(page);
       num++;
-    } else {
-      item.moduleName = item.module;
-      pagesNew.push(item);
     }
+
+    if (version) {
+      page.url = [PUBLIC_PATH + item.module + '.js?t=' + version];
+    } else {
+      page.url = [PUBLIC_PATH + item.module + '.js'];
+    }
+
+    pagesNew.push(page);
   });
 
   fs.writeFileSync(

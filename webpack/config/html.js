@@ -20,7 +20,7 @@ module.exports = function (config, argv) {
 
   let layout = get(SAAS_CONFIG, 'layout', false);
   if (layout === true) {
-    layout = 'boh-layout/dev/1.0.0';
+    layout = 'boh-layout/daily/1.0.3';
   }
 
   const weAppHostJS = [];
@@ -50,8 +50,8 @@ module.exports = function (config, argv) {
     cdnBase: CDN_BASE,
 
     layout,
-    env: process.env.NODE_ENV === 'development' ? 'local' : DOMAIN_ENV,
-    publishEnv: process.env.NODE_ENV === 'development' ? 'local' : PUBLISH_ENV,
+    env: DOMAIN_ENV,
+    publishEnv: PUBLISH_ENV,
 
     hostAppName: BUILD_APP_NAME,
 

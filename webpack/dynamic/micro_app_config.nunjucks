@@ -1,6 +1,6 @@
 export default {
-  microAppName: '{{ appName }}',
+  name: '{{ appName }}',
   basename: '{{ basename }}',
-  modules: {{ modules }},
+  pages: {{ modules }},
   version: '{{ version }}',
 };
