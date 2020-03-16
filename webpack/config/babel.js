@@ -31,7 +31,7 @@ module.exports = {
           legacy: true,
         },
       ],
-      resolve('babel-plugin-add-module-exports'),
+      // resolve('babel-plugin-add-module-exports'),
       resolve('@babel/plugin-proposal-class-properties'),
       resolve('@babel/plugin-transform-modules-commonjs'),
       resolve('@babel/plugin-proposal-function-bind'),
