@@ -17,6 +17,7 @@ module.exports = function (config, argv) {
   const pages = get(SAAS_CONFIG, 'page', {});
   const debug = get(SAAS_CONFIG, 'debug', false);
   const hostApp = get(SAAS_CONFIG, 'hostApp', []);
+  const hostAppName = get(SAAS_CONFIG, 'hostAppName', []);
 
   let layout = get(SAAS_CONFIG, 'layout', false);
   if (layout === true) {
@@ -58,7 +59,7 @@ module.exports = function (config, argv) {
     env: DOMAIN_ENV,
     publishEnv: PUBLISH_ENV,
 
-    hostAppName: BUILD_APP_NAME || (typeof hostApp === 'string' ? hostAppName : undefined),
+    hostAppName: BUILD_APP_NAME || (typeof hostApp === 'string' ? hostApp : undefined) || hostAppName,
 
     weAppHostJS,
     weAppHostCSS,
