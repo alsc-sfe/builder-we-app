@@ -7,7 +7,7 @@ const resolveAntd = require('../util/resolveAntd');
 module.exports = function (config) {
   config.resolve = config.resolve || {};
 
-  config.resolve.extensions = ['.js', '.jsx', '.less', '.ts', '.tsx'];
+  config.resolve.extensions = ['.js', '.jsx', '.less', '.ts', '.tsx', '.json'];
 
   const mPath = [
     'node_modules',
