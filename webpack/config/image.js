@@ -10,11 +10,11 @@ module.exports = function (config) {
   config.module.rules = config.module.rules || [];
 
   let imageModuleRule = [{
-    test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-    loader: 'url-loader?limit=10000&minetype=image/svg+xml',
+    test: /\.svg(\?.*)?$/,
+    loader: 'url-loader?limit=500000&minetype=image/svg+xml',
   }, {
-    test: /\.(png|jpg|jpeg|gif)(\?v=\d+\.\d+\.\d+)?$/i,
-    loader: 'url-loader?limit=10000',
+    test: /\.(png|jpg|jpeg|gif|eot|ttf|woff)(\?.*)?$/i,
+    loader: 'url-loader?limit=500000',
   }];
 
   config.module.rules = config.module.rules.concat(imageModuleRule);

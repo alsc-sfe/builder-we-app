@@ -24,6 +24,8 @@ const getPostcssConfig = () => {
   const postcssOptions = {
     sourceMap: true,
     plugins: [
+      require.resolve('postcss-import'),
+      require.resolve('postcss-url'),
       autoprefixer({
         browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
       })
@@ -85,6 +87,8 @@ module.exports = function (config, argv) {
           options: {
             sourceMap: true,
             modifyVars: themes,
+            noIeCompat: true,
+            javascriptEnabled: true,
           },
         }
       ]
@@ -102,6 +106,8 @@ module.exports = function (config, argv) {
           options: {
             sourceMap: true,
             modifyVars: themes,
+            noIeCompat: true,
+            javascriptEnabled: true,
           },
         }
       ]
