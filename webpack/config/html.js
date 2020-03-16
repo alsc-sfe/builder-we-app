@@ -40,7 +40,7 @@ module.exports = function (config, argv) {
   }
 
   htmlWebpackPlugins.push(new HtmlWebpackPlugin({
-    inject: appType === 'weAppHost',
+    inject: PUBLISH_ENV === 'local' && appType === 'weAppHost',
     template: require.resolve('./template.ejs'),
     filename: 'index.html',
 

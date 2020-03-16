@@ -22,7 +22,7 @@
     <%= heads[i] %>
     <% } %>
     <% if(isWeAppHost && publishEnv !== 'local') { %>
-    <link rel="stylesheet" href="<%= assetsUrl %>index.css" />
+    <%# <link rel="stylesheet" href="<%= assetsUrl %>index.css" /> %>
     <% } %>
     <% if(!isWeAppHost && weAppHostCSS.length > 0) { %>
     <% for(let i = 0; i < weAppHostCSS.length; i++) { %>
