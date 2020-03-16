@@ -1,7 +1,7 @@
 <%
   const {
     appType, isWeAppHost, title, env, publishEnv,
-    assetsUrl, cdnBase, hostAppName,
+    assetsUrl, cdnBase, hostAppName, useVersionEngine,
     heads, bodies, pages, debug, layout,
     weAppHostCSS, weAppHostJS
   } = htmlWebpackPlugin.options
@@ -22,9 +22,9 @@
     <%= heads[i] %>
     <% } %>
     <% if(isWeAppHost && publishEnv !== 'local') { %>
-    <%# <link rel="stylesheet" href="<%= assetsUrl %>index.css" /> %>
+    <!-- <link rel="stylesheet" href="<%= assetsUrl %>index.css" /> -->
     <% } %>
-    <% if(!isWeAppHost && weAppHostCSS.length > 0) { %>
+    <% if(!isWeAppHost && publishEnv === 'local' && weAppHostCSS.length > 0) { %>
     <% for(let i = 0; i < weAppHostCSS.length; i++) { %>
     <link rel="stylesheet" href="<%= weAppHostCSS[i] %>" />
     <% } %>
@@ -76,13 +76,17 @@
     <% for(let i = 0; i < bodies.length; i++) { %>
     <%= bodies[i] %>
     <% } %>
-    <% if(!isWeAppHost && weAppHostJS.length > 0) { %>
+    <% if(!isWeAppHost && publishEnv === 'local' && weAppHostJS.length > 0) { %>
     <% for(let i = 0; i < weAppHostJS.length; i++) { %>
     <script src="<%= weAppHostJS[i] %>" crossorigin="anonymous"></script>
     <% } %>
     <% } %>
     <% if(isWeAppHost && publishEnv !== 'local') { %>
+    <% if(useVersionEngine) { %>
     <script src="<%= assetsUrl %>version-engine.js" crossorigin="anonymous"></script>
+    <% } else { %>
+    <script src="<%= assetsUrl %>index.js" crossorigin="anonymous"></script>
+    <% } %>
     <% } %>
   </body>
 </html>

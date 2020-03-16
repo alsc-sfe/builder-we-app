@@ -18,6 +18,7 @@ module.exports = function (config, argv) {
   const debug = get(SAAS_CONFIG, 'debug', false);
   const hostApp = get(SAAS_CONFIG, 'hostApp', []);
   const hostAppName = get(SAAS_CONFIG, 'hostAppName', []);
+  const useVersionEngine = get(SAAS_CONFIG, 'useVersionEngine', false);
 
   let layout = get(SAAS_CONFIG, 'layout', false);
   if (layout === true) {
@@ -63,6 +64,8 @@ module.exports = function (config, argv) {
 
     weAppHostJS,
     weAppHostCSS,
+
+    useVersionEngine,
   }));
 
   if (PUBLISH_ENV === 'local' || isWeAppHost) {
