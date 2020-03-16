@@ -20,17 +20,23 @@ let themes = get(SAAS_CONFIG, 'webpack.themes', {});
 // 获取sass.config.js 端配置
 let sat = SAAS_CONFIG.sat || 'pc';
 
-const getPostcssConfig = () => {
+const getPostcssConfig = (isCss) => {
   const postcssOptions = {
     sourceMap: true,
     plugins: [
-      require.resolve('postcss-import'),
-      require.resolve('postcss-url'),
       autoprefixer({
         browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
       })
     ],
   };
+
+  if (isCss) {
+    postcssOptions.plugins.unshift(
+      require.resolve('postcss-import'),
+      require.resolve('postcss-url'),
+    );
+  }
+
   // H5/app postcss配置：屏幕适配
   /h5/.test(sat) && postcssOptions.plugins.push(
     pxtoremPlugin({
@@ -46,8 +52,6 @@ module.exports = function (config, argv) {
   config.module = config.module || {};
   config.module.rules = config.module.rules || [];
   config.plugins = config.plugins || [];
-
-  const postcssOptions = getPostcssConfig();
 
   const cssOptions = {
     modules: true,
@@ -67,7 +71,7 @@ module.exports = function (config, argv) {
         loader: require.resolve('css-loader'),
       }, {
         loader: require.resolve('postcss-loader'),
-        options: postcssOptions,
+        options: getPostcssConfig(true),
       }],
     },
     {
@@ -80,7 +84,7 @@ module.exports = function (config, argv) {
           options: cssOptions
         }, {
           loader: require.resolve('postcss-loader'),
-          options: postcssOptions,
+          options: getPostcssConfig(),
         },
         {
           loader: require.resolve('less-loader'),
