@@ -60,8 +60,7 @@
       window.publishEnv = '<%= publishEnv %>';
       window.cdnBase = '<%= cdnBase %>';
       window.hostAppName = '<%= hostAppName %>';
-    <% if(!isWeAppHost) { %>
-      <% if(publishEnv === 'local') { %>
+      <% if(!isWeAppHost && publishEnv === 'local') { %>
       window[Symbol.for('WeAppList')] = [
         <% if (layout) { %>
         '<%= layout %>',
@@ -71,7 +70,6 @@
       <% } else { %>
       window[Symbol.for('WeAppList')] = '<%= hostAppName %>';
       <% } %>
-    <% } %>
     </script>
     <% for(let i = 0; i < bodies.length; i++) { %>
     <%= bodies[i] %>
