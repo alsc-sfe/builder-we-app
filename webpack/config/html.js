@@ -16,7 +16,7 @@ module.exports = function (config, argv) {
   const title = get(SAAS_CONFIG, 'title', '');
   const pages = get(SAAS_CONFIG, 'page', {});
   const debug = get(SAAS_CONFIG, 'debug', false);
-  const weAppHostUrl = get(SAAS_CONFIG, 'weAppHostUrl', []);
+  const hostApp = get(SAAS_CONFIG, 'hostApp', []);
 
   let layout = get(SAAS_CONFIG, 'layout', false);
   if (layout === true) {
@@ -25,13 +25,18 @@ module.exports = function (config, argv) {
 
   const weAppHostJS = [];
   const weAppHostCSS = [];
-  weAppHostUrl.forEach((url) => {
-    if (url.indexOf('.js') > -1) {
-      weAppHostJS.push(url);
-    } else if (url.indexOf('.css') > -1) {
-      weAppHostCSS.push(url);
-    }
-  });
+
+  if (typeof hostApp === 'string') {
+    // 获取父应用静态资源地址
+  } else {
+    hostApp.forEach((url) => {
+      if (url.indexOf('.js') > -1) {
+        weAppHostJS.push(url);
+      } else if (url.indexOf('.css') > -1) {
+        weAppHostCSS.push(url);
+      }
+    });
+  }
 
   htmlWebpackPlugins.push(new HtmlWebpackPlugin({
     inject: appType === 'weAppHost',
@@ -53,7 +58,7 @@ module.exports = function (config, argv) {
     env: DOMAIN_ENV,
     publishEnv: PUBLISH_ENV,
 
-    hostAppName: BUILD_APP_NAME,
+    hostAppName: BUILD_APP_NAME || (typeof hostApp === 'string' ? hostAppName : undefined),
 
     weAppHostJS,
     weAppHostCSS,
