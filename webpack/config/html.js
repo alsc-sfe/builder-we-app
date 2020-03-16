@@ -65,7 +65,7 @@ module.exports = function (config, argv) {
     weAppHostCSS,
   }));
 
-  if (publishEnv === 'local' || isWeAppHost) {
+  if (PUBLISH_ENV === 'local' || isWeAppHost) {
     config.plugins = config.plugins.concat(htmlWebpackPlugins);
   }
 }
