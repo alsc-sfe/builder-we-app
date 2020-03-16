@@ -1,7 +1,6 @@
 'use strict';
 const babelLoader = require('./babel');
 
-
 module.exports = function (config) {
 
   config.module = config.module || {};
@@ -12,7 +11,9 @@ module.exports = function (config) {
     test: /\.js|jsx$/,
     exclude: /node_modules/,
     use: [
-      babelLoader
+      require.resolve('thread-loader'),
+      require.resolve('cache-loader'),
+      babelLoader,
     ]
   };
 
