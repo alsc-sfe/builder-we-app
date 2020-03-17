@@ -8,6 +8,30 @@ const { isWeAppHost } = require('../util/appType');
 
 const { resolveHeads, resolveBodies } = plugins;
 
+const react = {
+  15: {
+    prod: 'https://gw.alipayobjects.com/os/lib/react/15.6.2/dist/react.min.js',
+    dev: 'https://gw.alipayobjects.com/os/lib/react/15.6.2/dist/react.js',
+  },
+  latest: {
+    prod: 'https://gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.production.min.js',
+    dev: 'https://gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.development.js',
+  },
+};
+
+const reactDOM = {
+  15: {
+    prod: 'https://gw.alipayobjects.com/os/lib/react-dom/15.6.2/dist/react-dom.min.js',
+    dev: 'https://gw.alipayobjects.com/os/lib/react-dom/15.6.2/dist/react-dom.js',
+  },
+  latest: {
+    prod: 'https://gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.production.min.js',
+    dev: 'https://gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.development.js',
+  },
+};
+
+const isProd = ['local', 'project', 'daily'].indexOf(PUBLISH_ENV) === -1;
+
 module.exports = function (config, argv) {
   config.plugins = config.plugins || [];
 
@@ -19,6 +43,11 @@ module.exports = function (config, argv) {
   const hostApp = get(SAAS_CONFIG, 'hostApp', []);
   const hostAppName = get(SAAS_CONFIG, 'hostAppName', []);
   const useVersionEngine = get(SAAS_CONFIG, 'useVersionEngine', false);
+
+  const reactVersion = get(SAAS_CONFIG, 'reactVersion', 'latest');
+
+  const reactUrl = (react[reactVersion] || react.latest)[isProd ? 'prod' : 'dev'];
+  const reactDOMUrl = (reactDOM[reactVersion] || reactDOM.latest)[isProd ? 'prod' : 'dev'];
 
   let layout = get(SAAS_CONFIG, 'layout', false);
   if (layout === true) {
@@ -66,6 +95,9 @@ module.exports = function (config, argv) {
     weAppHostCSS,
 
     useVersionEngine,
+
+    reactUrl,
+    reactDOMUrl,
   }));
 
   if (PUBLISH_ENV === 'local' || isWeAppHost) {

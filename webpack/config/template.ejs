@@ -3,7 +3,7 @@
     appType, isWeAppHost, title, env, publishEnv,
     assetsUrl, cdnBase, hostAppName, useVersionEngine,
     heads, bodies, pages, debug, layout,
-    weAppHostCSS, weAppHostJS
+    weAppHostCSS, weAppHostJS, reactUrl, reactDOMUrl
   } = htmlWebpackPlugin.options
 %>
 <!DOCTYPE html>
@@ -30,13 +30,8 @@
     <% } %>
     <% } %>
     <script src="https://gw.alipayobjects.com/as/g/component/babel-polyfill/6.20.0/polyfill.min.js" crossorigin="anonymous"></script>
-    <% if(['local', 'project', 'daily'].indexOf(publishEnv) === -1) { %>
-    <script src="https://gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.production.min.js" crossorigin="anonymous"></script>
-    <script src="https://gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-    <% } else { %>
-    <script src="https://gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.development.js" crossorigin="anonymous"></script>
-    <script src="https://gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.development.js" crossorigin="anonymous"></script>
-    <% } %>
+    <script src="<%= reactUrl %>" crossorigin="anonymous"></script>
+    <script src="<%= reactDOMUrl %>" crossorigin="anonymous"></script>
     <script src="https://gw.alipayobjects.com/os/lib/moment/2.24.0/min/moment.min.js" crossorigin="anonymous"></script>
     <script src="https://gw.alipayobjects.com/os/lib/moment/2.24.0/locale/zh-cn.js" crossorigin="anonymous"></script>
     <script src="https://gw.alipayobjects.com/os/lib/antd/3.25.2/dist/antd-with-locales.js" crossorigin="anonymous"></script>
