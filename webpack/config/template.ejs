@@ -38,8 +38,13 @@
     <script src="https://gw.alipayobjects.com/os/lib/ant-design/icons/2.1.1/lib/umd.js" crossorigin="anonymous"></script>
     <script src="https://gw.alipayobjects.com/os/mentor/saas-fetch/2.0.9/umd/saas-fetch-min.js" crossorigin="anonymous"></script>
     <script src="https://gw.alipayobjects.com/os/mentor/saas-fetch-choice/1.0.2/umd/saas-fetch-choice-min.js" crossorigin="anonymous"></script>
+    <% if(['pre', 'prod'].indexOf(publishEnv) > -1) { %>
     <script src="https://gw.alipayobjects.com/os/lib/systemjs/6.1.4/dist/system.min.js" crossorigin="anonymous"></script>
     <script src="https://gw.alipayobjects.com/os/lib/systemjs/6.1.4/dist/extras/named-register.min.js" crossorigin="anonymous"></script>
+    <% } else { %>
+    <script src="https://gw.alipayobjects.com/os/lib/systemjs/6.1.4/dist/system.js" crossorigin="anonymous"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/systemjs/6.1.4/dist/extras/named-register.js" crossorigin="anonymous"></script>
+    <% } %>
     <script src="https://g.alicdn.com/code/npm/@alife/system-react/1.0.1/library/umd/react-min.js" crossorigin="anonymous"></script>
     <script src="https://g.alicdn.com/code/npm/@alife/system-react-dom/1.0.0/library/umd/react-dom-min.js" crossorigin="anonymous"></script>
     <script src="https://g.alicdn.com/code/npm/@alife/system-antd/1.0.1/library/umd/antd-min.js" crossorigin="anonymous"></script>
