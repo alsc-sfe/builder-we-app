@@ -32,8 +32,8 @@ const getPostcssConfig = (isCss) => {
 
   if (isCss) {
     postcssOptions.plugins.unshift(
-      require.resolve('postcss-import'),
-      require.resolve('postcss-url'),
+      require('postcss-import'),
+      require('postcss-url'),
     );
   }
 
@@ -64,7 +64,7 @@ module.exports = function (config, argv) {
 
   const styleModuleRule = [{
       test: /\.css$/,
-      exclude: path.resolve(ROOT_PATH, 'src/'),
+      // exclude: path.resolve(ROOT_PATH, 'src/'),
       use: [{
         loader: require.resolve('style-loader'),
       }, {

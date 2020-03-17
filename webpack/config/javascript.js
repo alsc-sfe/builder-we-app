@@ -8,7 +8,7 @@ module.exports = function (config) {
 
 
   let babelModuleRule = {
-    test: /\.js|jsx$/,
+    test: /\.jsx?$/,
     exclude: /node_modules/,
     use: [
       require.resolve('thread-loader'),
