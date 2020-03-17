@@ -33,7 +33,7 @@ module.exports = {
       ],
       // resolve('babel-plugin-add-module-exports'),
       resolve('@babel/plugin-proposal-class-properties'),
-      resolve('@babel/plugin-transform-modules-commonjs'),
+      // resolve('@babel/plugin-transform-modules-commonjs'),
       resolve('@babel/plugin-proposal-function-bind'),
       resolve('@babel/plugin-proposal-export-default-from'),
       resolve('@babel/plugin-proposal-export-namespace-from'),
