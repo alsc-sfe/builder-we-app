@@ -7,10 +7,8 @@ const path = require('path');
 const get = require('lodash/get');
 const WebpackDevServer = require('webpack-dev-server');
 
-const webpackDevConfig = require("./webpack/webpack.dev.config");
+const getWebpackDevConfig = require("./webpack/webpack.dev.config");
 const { SAAS_CONFIG } = require('./webpack/util/const');
-
-const compiler = webpack(webpackDevConfig);
 
 const start = async () => {
   const getStartParam = async () => {
@@ -47,6 +45,8 @@ const start = async () => {
 
   const startParam = await getStartParam();
 
+  const webpackDevConfig = getWebpackDevConfig(startParam);
+  const compiler = webpack(webpackDevConfig);
   // 第一次编译成功时： 打开页面
   let hasCompile = false;
   compiler.plugin('done', async stats => {

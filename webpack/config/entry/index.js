@@ -4,10 +4,10 @@ const { isWeAppHost } = require('../../util/appType');
 const resolveHostEntries = require('./host');
 const resolveChildEntries = require('./child');
 
-module.exports = function (config, argv) {
+module.exports = function (config, startParam) {
   if (isWeAppHost) {
-    resolveHostEntries(config, argv);
+    resolveHostEntries(config, startParam);
   } else {
-    resolveChildEntries(config, argv);
+    resolveChildEntries(config, startParam);
   }
 }

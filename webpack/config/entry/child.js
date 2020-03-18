@@ -30,9 +30,8 @@ const { host, port } = get(SAAS_CONFIG, 'webpack.devServer', {
   host: 'localhost',
   port: '8000',
 });
-const PUBLIC_PATH = PUBLISH_ENV === 'local' ? `//${host}:${port || '8000'}/` : ASSETS_URL;
 
-module.exports = function (config, argv) {
+module.exports = function (config, startParam) {
   const entries = config.entry || {};
   let pages = get(SAAS_CONFIG, 'page', {});
   pages = filterPage(pages);
@@ -57,6 +56,10 @@ module.exports = function (config, argv) {
   const pagesNew = [];
   let num = 1;
   const version = PUBLISH_ENV === 'daily' ? (+ new Date()) : '';
+
+  const localPort = startParam ? startParam.port : port;
+  const PUBLIC_PATH = PUBLISH_ENV === 'local' ? `//${host}:${localPort || '8000'}/` : ASSETS_URL;
+
   pages.forEach(item => {
     const page = {
       ...item,
