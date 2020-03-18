@@ -20,7 +20,7 @@ const applyJsConfig = require('./config/javascript');
 // webpack 基础配置
 const getWebpackBase = require('./webpack.base.config');
 
-function getWebpackDevConfig() {
+function getWebpackDevConfig(startParam) {
   let baseConfig = getWebpackBase();
 
   // js入口
@@ -54,4 +54,4 @@ function getWebpackDevConfig() {
   return baseConfig;
 }
 
-module.exports = baseConfig;
+module.exports = getWebpackDevConfig;
