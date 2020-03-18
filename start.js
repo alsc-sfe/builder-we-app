@@ -33,12 +33,12 @@ const start = async () => {
     if (startParam.path) {
       url += `/${startParam.path}`
     }
-  
+
     const query = querystring.stringify(startParam.query);
     if (query) {
       url += `?${query}`;
     }
-  
+
     return {
       url,
       port
@@ -51,7 +51,7 @@ const start = async () => {
   let hasCompile = false;
   compiler.plugin('done', async stats => {
     if (!stats.hasErrors() && !hasCompile) {
-      open(startParam.url);
+      // open(startParam.url);
       hasCompile = true;
     }
   });
