@@ -66,60 +66,74 @@ module.exports = function (config, argv) {
   const styleModuleRule = [{
       test: /\.css$/,
       // exclude: path.resolve(ROOT_PATH, 'src/'),
-      use: [{
-        loader: MiniCssExtractPlugin.loader,
-      }, {
-        loader: require.resolve('style-loader'),
-      }, {
-        loader: require.resolve('css-loader'),
-      }, {
-        loader: require.resolve('postcss-loader'),
-        options: getPostcssConfig(true),
-      }],
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+        },
+        // {
+        //   loader: require.resolve('style-loader'),
+        // },
+        {
+          loader: require.resolve('css-loader'),
+        },
+        {
+          loader: require.resolve('postcss-loader'),
+          options: getPostcssConfig(true),
+        },
+      ],
     },
     {
       test: /\.less$/,
       exclude: excludeReg,
-      use: [{
-        loader: MiniCssExtractPlugin.loader,
-      }, {
-        loader: require.resolve('style-loader'),
-      }, {
-        loader: require.resolve('css-loader'),
-        options: cssOptions
-      }, {
-        loader: require.resolve('postcss-loader'),
-        options: getPostcssConfig(),
-      },
-      {
-        loader: require.resolve('less-loader'),
-        options: {
-          sourceMap: true,
-          modifyVars: themes,
-          noIeCompat: true,
-          javascriptEnabled: true,
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
         },
-      }],
+        // {
+        //   loader: require.resolve('style-loader'),
+        // },
+        {
+          loader: require.resolve('css-loader'),
+          options: cssOptions
+        },
+        {
+          loader: require.resolve('postcss-loader'),
+          options: getPostcssConfig(),
+        },
+        {
+          loader: require.resolve('less-loader'),
+          options: {
+            sourceMap: true,
+            modifyVars: themes,
+            noIeCompat: true,
+            javascriptEnabled: true,
+          },
+        },
+      ],
     },
     {
       test: /\.less$/,
       include: excludeReg,
-      use: [{
-        loader: MiniCssExtractPlugin.loader,
-      }, {
-        loader: require.resolve('style-loader'),
-      }, {
-        loader: require.resolve('css-loader'),
-      },
-      {
-        loader: require.resolve('less-loader'),
-        options: {
-          sourceMap: true,
-          modifyVars: themes,
-          noIeCompat: true,
-          javascriptEnabled: true,
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
         },
-      }],
+        // {
+        //   loader: require.resolve('style-loader'),
+        // },
+        {
+          loader: require.resolve('css-loader'),
+        },
+        {
+          loader: require.resolve('less-loader'),
+          options: {
+            sourceMap: true,
+            modifyVars: themes,
+            noIeCompat: true,
+            javascriptEnabled: true,
+          },
+        },
+      ],
     }
   ];
 
