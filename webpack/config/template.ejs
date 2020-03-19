@@ -19,10 +19,10 @@
     <link rel="stylesheet" href="//at.alicdn.com/t/font_825912_8drbhr0dp7i.css" />
     <link rel="stylesheet" href="https://gw.alipayobjects.com/os/lib/antd/3.25.2/dist/antd.css" />
     <% for(let i = 0; i < heads.length; i++) { %>
-    <%- heads[i] %>
+    <%= heads[i] %>
     <% } %>
     <% if(isWeAppHost && publishEnv !== 'local') { %>
-    <!-- <link rel="stylesheet" href="<%= assetsUrl %>index.css" /> -->
+    <link rel="stylesheet" href="<%= assetsUrl %>index.css" />
     <% } %>
     <% if(!isWeAppHost && publishEnv === 'local' && weAppHostCSS.length > 0) { %>
     <% for(let i = 0; i < weAppHostCSS.length; i++) { %>
@@ -72,7 +72,7 @@
       <% } %>
     </script>
     <% for(let i = 0; i < bodies.length; i++) { %>
-    <%- bodies[i] %>
+    <%= bodies[i] %>
     <% } %>
     <% if(!isWeAppHost && publishEnv === 'local' && weAppHostJS.length > 0) { %>
     <% for(let i = 0; i < weAppHostJS.length; i++) { %>

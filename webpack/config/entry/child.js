@@ -73,10 +73,11 @@ module.exports = function (config, startParam) {
       num++;
     }
 
+    const filePath = `${PUBLIC_PATH}${item.module}`;
     if (version) {
-      page.url = [PUBLIC_PATH + item.module + '.js?t=' + version];
+      page.url = [`${filePath}.js?t=${version}`, `${filePath}.css?t=${version}`];
     } else {
-      page.url = [PUBLIC_PATH + item.module + '.js'];
+      page.url = [`${filePath}.js`, `${filePath}.css`];
     }
 
     pagesNew.push(page);
