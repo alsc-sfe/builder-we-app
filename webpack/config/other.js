@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const get = require('lodash/get');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const systemModulePlugin = require('@saasfe/saas-webpack-system-module');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { ROOT_PATH, SAAS_CONFIG, ASSETS_URL } = require('../util/const');
 
 const microAppName = get(SAAS_CONFIG, 'microAppName', '');
@@ -18,4 +19,5 @@ module.exports = function(config){
     'MICRO_APPNAME': JSON.stringify(microAppName),
     'PUBLIC_PATH': JSON.stringify(ASSETS_URL),
   }));
+  config.plugins.push(new MiniCssExtractPlugin());
 };

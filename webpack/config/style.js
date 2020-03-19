@@ -9,6 +9,7 @@ const get = require('lodash/get');
 const pxtoremPlugin = require('postcss-pxtorem');
 const safeAreaInsetPlugin = require('postcss-safe-area-inset')
 const autoprefixer = require('autoprefixer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {
   SAAS_CONFIG,
   CSS_SCOPE,
@@ -66,6 +67,8 @@ module.exports = function (config, argv) {
       test: /\.css$/,
       // exclude: path.resolve(ROOT_PATH, 'src/'),
       use: [{
+        loader: MiniCssExtractPlugin.loader,
+      }, {
         loader: require.resolve('style-loader'),
       }, {
         loader: require.resolve('css-loader'),
@@ -78,43 +81,45 @@ module.exports = function (config, argv) {
       test: /\.less$/,
       exclude: excludeReg,
       use: [{
-          loader: require.resolve('style-loader'),
-        }, {
-          loader: require.resolve('css-loader'),
-          options: cssOptions
-        }, {
-          loader: require.resolve('postcss-loader'),
-          options: getPostcssConfig(),
+        loader: MiniCssExtractPlugin.loader,
+      }, {
+        loader: require.resolve('style-loader'),
+      }, {
+        loader: require.resolve('css-loader'),
+        options: cssOptions
+      }, {
+        loader: require.resolve('postcss-loader'),
+        options: getPostcssConfig(),
+      },
+      {
+        loader: require.resolve('less-loader'),
+        options: {
+          sourceMap: true,
+          modifyVars: themes,
+          noIeCompat: true,
+          javascriptEnabled: true,
         },
-        {
-          loader: require.resolve('less-loader'),
-          options: {
-            sourceMap: true,
-            modifyVars: themes,
-            noIeCompat: true,
-            javascriptEnabled: true,
-          },
-        }
-      ]
+      }],
     },
     {
       test: /\.less$/,
       include: excludeReg,
       use: [{
-          loader: require.resolve('style-loader'),
-        }, {
-          loader: require.resolve('css-loader'),
+        loader: MiniCssExtractPlugin.loader,
+      }, {
+        loader: require.resolve('style-loader'),
+      }, {
+        loader: require.resolve('css-loader'),
+      },
+      {
+        loader: require.resolve('less-loader'),
+        options: {
+          sourceMap: true,
+          modifyVars: themes,
+          noIeCompat: true,
+          javascriptEnabled: true,
         },
-        {
-          loader: require.resolve('less-loader'),
-          options: {
-            sourceMap: true,
-            modifyVars: themes,
-            noIeCompat: true,
-            javascriptEnabled: true,
-          },
-        }
-      ]
+      }],
     }
   ];
 
