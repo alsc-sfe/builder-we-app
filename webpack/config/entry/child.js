@@ -62,12 +62,15 @@ module.exports = function (config, startParam) {
 
   pages.forEach(item => {
     const page = {
-      ...item,
       name: item.module,
       path: item.route,
+      ...item,
     };
 
-    if (pagesNew.findIndex(itemInner => itemInner.module === item.module) > -1) {
+    if (
+      pagesNew.findIndex(itemInner => itemInner.module === item.module) > -1 &&
+      page.name === page.module
+    ) {
       page.name = `${item.module}-${num}`;
 
       num++;
