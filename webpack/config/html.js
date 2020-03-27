@@ -10,23 +10,23 @@ const { resolveHeads, resolveBodies } = plugins;
 
 const react = {
   15: {
-    prod: 'https://gw.alipayobjects.com/os/lib/react/15.6.2/dist/react.min.js',
-    dev: 'https://gw.alipayobjects.com/os/lib/react/15.6.2/dist/react.js',
+    prod: '//gw.alipayobjects.com/os/lib/react/15.6.2/dist/react.min.js',
+    dev: '//gw.alipayobjects.com/os/lib/react/15.6.2/dist/react.js',
   },
   latest: {
-    prod: 'https://gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.production.min.js',
-    dev: 'https://gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.development.js',
+    prod: '//gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.production.min.js',
+    dev: '//gw.alipayobjects.com/os/lib/react/16.8.6/umd/react.development.js',
   },
 };
 
 const reactDOM = {
   15: {
-    prod: 'https://gw.alipayobjects.com/os/lib/react-dom/15.6.2/dist/react-dom.min.js',
-    dev: 'https://gw.alipayobjects.com/os/lib/react-dom/15.6.2/dist/react-dom.js',
+    prod: '//gw.alipayobjects.com/os/lib/react-dom/15.6.2/dist/react-dom.min.js',
+    dev: '//gw.alipayobjects.com/os/lib/react-dom/15.6.2/dist/react-dom.js',
   },
   latest: {
-    prod: 'https://gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.production.min.js',
-    dev: 'https://gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.development.js',
+    prod: '//gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.production.min.js',
+    dev: '//gw.alipayobjects.com/os/lib/react-dom/16.8.6/umd/react-dom.development.js',
   },
 };
 
