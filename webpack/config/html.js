@@ -73,6 +73,7 @@ module.exports = function (config, argv) {
     inject: PUBLISH_ENV === 'local' && appType === 'weAppHost',
     template: require.resolve('./template.ejs'),
     filename: 'index.html',
+    minify: argv && argv.minify,
 
     appType,
     isWeAppHost,

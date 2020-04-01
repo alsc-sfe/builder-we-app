@@ -31,7 +31,7 @@ applyTsConfig(baseConfig);
 // js/jsx
 applyJsConfig(baseConfig);
 // html模板替换
-applyHtmlConfig(baseConfig);
+applyHtmlConfig(baseConfig, { minify: true });
 // 图片 loader
 applyImageConfig(baseConfig);
 // css样式
