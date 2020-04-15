@@ -9,4 +9,5 @@ module.exports = function(config) {
   config.externals['@ant-design/icons/lib/dist'] = 'AntDesignIcons';
   config.externals['saas-fetch'] = 'saas-fetch';
   config.externals['saas-fetch-mtop'] = 'saas-fetch-mtop';
+  config.externals['@saasfe/we-app-react'] = 'WeAppReact';
 }
